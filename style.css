@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
+:root {
+  --light-background-color: #F4F6FA;
+  --light-primary-text-color: #313E51;
+  --light-secondary-text-color: #626C7F;
+
+  --dark-bacground-color: #313E51;
+
+  --primary-color: #A729F5;
+  --true-color: #26D782;
+  --false-color: #EE5454;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,4 +20,122 @@
 
 body {
   font-family: 'Rubik';
+  background-color: var(--light-background-color);
+}
+
+header {
+  padding: 2rem;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sun-icon, .moon-icon {
+  height: 1.5rem;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 2.5rem;
+  height: 1.5rem;
+}
+
+.switch input { 
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #A729F5;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1rem;
+  width: 1rem;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #A729F5;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(1rem);
+}
+
+.slider.round {
+  border-radius: 50px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+.container {
+  margin: 2rem;
+}
+
+.title-section {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  color: var(--light-primary-text-color);
+  font-size: 2.5rem;
+}
+
+span {
+  font-weight: 300;
+}
+
+p {
+  color: var(--light-secondary-text-color);
+  margin-top: 1rem;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.chapter-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+button {
+  color: var(--light-primary-text-color);
+  font-size: 0.8rem;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+  border: none;
+  cursor: pointer;
+}
+
+.chapter-section img {
+  height: 3rem;
+  border-radius: 10px;
 }

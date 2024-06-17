@@ -249,4 +249,23 @@ h3 {
   justify-content: center;
   background-color: #A729F5;
   color: white;
+  border: none;
+}
+
+input[type=submit] {
+  color: white !important;
+  font-size: 18px;
+  color: #313E51;
+  background-color: #A729F5;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+  border: none;
+  cursor: pointer;
+  width: 100%;
 }

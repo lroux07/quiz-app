@@ -6,95 +6,13 @@ const jsButton = document.querySelector('#jsButton');
 const accessButton = document.querySelector('#accessButton');
 const counter = 0;
 
-// const reponse = await fetch("https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple");
-// const questions = await reponse.json();
-// console.log(questions);
+const reponse = await fetch("https://quizapi.io/api/v1/questions?apiKey=tOUOvZ1zuMC0Uo6RXZ0opRicHdpg4siBS6n5INyg&category=code&difficulty=Easy&limit=10&tags=HTML");
+const questions = await reponse.json();
+console.log(questions);
 
-const questions = [
-    {
-        number: 1,
-        question: "Question sur le HTML",
-        letter: [
-            "A",
-            "B",
-            "C",
-            "D"
-        ],
-        responses: [
-            "Reponse 1",
-            "Reponse 2",
-            "Reponse 3",
-            "Reponse 4"
-        ],
-    },
-    {
-        number: 2,
-        question: "Question 2",
-        letter: [
-            "A",
-            "B",
-            "C",
-            "D"
-        ],
-        responses: [
-            "Reponse 1",
-            "Reponse 2",
-            "Reponse 3",
-            "Reponse 4"
-        ],
-    },
-    {
-        number: 3,
-        question: "Question 3",
-        letter: [
-            "A",
-            "B",
-            "C",
-            "D"
-        ],
-        responses: [
-            "Reponse 1", true,
-            "Reponse 2",
-            "Reponse 3",
-            "Reponse 4"
-        ],
-    },
-    {
-        number: 4,
-        question: "Question 4",
-        letter: [
-            "A",
-            "B",
-            "C",
-            "D"
-        ],
-        responses: [
-            "Reponse 1", true,
-            "Reponse 2",
-            "Reponse 3",
-            "Reponse 4"
-        ],
-    },
-    {
-        number: 5,
-        question: "Question 5",
-        letter: [
-            "A",
-            "B",
-            "C",
-            "D"
-        ],
-        responses: [
-            "Reponse 1",
-            "Reponse 2",
-            "Reponse 3",
-            "Reponse 4"
-        ],
-    }
-];
-
-const htmlFunction = (e) => {
+const htmlFunction = (questionIndex) => {
     htmlButton.addEventListener('click', () => {
+        const question = questions[questionIndex];
         body.innerHTML = `
             <header class="header-game">
                 <div>
@@ -114,8 +32,8 @@ const htmlFunction = (e) => {
 
             <main>
                 <article class="aricle-question">
-                    <p>Question ${questions[0].number} sur 5</p>
-                    <h2 class="question">${questions[0].question}</h2>
+                    <p>Question 1 sur 10</p>
+                    <h2 class="question">${question.question}</h2>
 
                     <div class="line">
                         <div class="line2"></div>
@@ -123,26 +41,19 @@ const htmlFunction = (e) => {
                 </article>
 
                 <form action="">
-                    <div class="inputs">
-                        <input type="radio" id="response_1" class="responses" name="fav_language" value="response_1">
-                        <label for="response_1"><h3>${questions[0].letter[0]}</h3> ${questions[0].responses[0]}</label>
-                    </div>
-
-                    <div class="inputs">
-                        <input type="radio" id="response_2" class="responses" name="fav_language" value="response_2">
-                        <label for="response_2"><h3>${questions[0].letter[1]}</h3> ${questions[0].responses[1]}</label>
-                    </div>
-
-                    <div class="inputs">
-                        <input type="radio" id="response_3" class="responses" name="fav_language" value="response_3">
-                        <label for="response_3"><h3>${questions[0].letter[2]}</h3> ${questions[0].responses[2]}</label>
-                    </div>
-
-                    <div class="inputs">
-                        <input type="radio" id="response_4" class="responses" name="fav_language" value="response_4">
-                        <label for="response_4"><h3>${questions[0].letter[3]}</h3> ${questions[0].responses[3]}</label>
-                    </div>
-                    <button class="submit">Envoyer</button>
+                    ${Object.keys(question.answers).map((key, index) => {
+                        if (question.answers[key] !== null) {
+                            return `
+                            <div class="inputs">
+                                <input type="radio" id="response_${index + 1}" class="responses" name="fav_language" value="response_${index + 1}">
+                                <label for="response_${index + 1}"><h3>${String.fromCharCode(65 + index)}</h3> ${question.answers[key]}</label>
+                            </div>
+                            `;
+                        } else {
+                            return '';
+                        }
+                    }).join('')}
+                    <input type="submit" value="Envoyer" class="submit" />
                 </form>
             </main>
         `;
@@ -160,8 +71,11 @@ const htmlFunction = (e) => {
             });
         });
     });
+};
+
+for (let i = 0; i < questions.length; i++) {
+    htmlFunction(i);
 }
-htmlFunction();
 
 const cssFunction = () => {
     cssButton.addEventListener('click', () => {
